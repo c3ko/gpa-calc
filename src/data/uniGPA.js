@@ -1,3 +1,5 @@
+import { SourceCode } from "eslint"
+
 export const OMSAS_SCALE_TABLE = [
     ["4.00","9","8","90–100","93–100","94–100","94–100","A+","A","A+"  ],
     ["3.90","","","85–89","84–92","87–93","85–93","A","",""  ],
@@ -36,4 +38,62 @@ Uni_List = {
     52: {name: "University of Victoria", cols: [3,7]}, 53: {name: "University of Waterloo", cols: [3,7]}, 54: {name: "Western University", cols: [3]},
     55: {name: "Wilfrid Laurier University", cols: [7]}, 56: {name: "University of Windsor", cols: [3,7]}, 57: {name: "University of Winnipeg", cols: [7]},
     58: {name: "York University", cols: [9]}
+}
+
+const medSchools = {
+    1: {name: "University of Toronto"},
+    2: {name: "Northern Ontario School of Medicine"},
+    3: {name: "Michael G. Degroote School of Medicine (McMaster University)"},
+    4: {name: "University of Ottawa"},
+    5: {name: "Queen's University"},
+    6: {name: "Schulich School of Medicine & Dentistry(Western University)"}
+}
+
+
+function convertGradeToGPA(schoolCode, grade, isPercentage){
+    const convColNums = Uni_List[schoolCode].cols
+    // Case where a grade can be both letter or percentage
+    if (convColNums.length > 1){
+        if (isPercentage){
+            return getRangeGPA(grade, convColNums[0])
+        }
+        else {
+            return getLetterGPA(grade, convColNums[1])
+        }
+    }
+
+    return getLetterGPA(grade, convColNums[0])
+} 
+
+function getLetterGPA(letter, colNum){
+    let gpa = "0.00"
+    for(let i = 0; i < OMSAS_SCALE_TABLE.length; i++){
+        if (OMSAS_SCALE_TABLE[i][colNum - 1] === letter){
+            gpa = OMSAS_SCALE_TABLE[i][0]
+        }
+    }
+    return gpa
+}
+function getRangeGPA(number, colNum){
+    // Check col of each row in table for correct range and return corresponding GPA
+    let gpa = "0.00"
+    for(let i = 0; i < OMSAS_SCALE_TABLE.length; i++){
+        if (numberInRange(OMSAS_SCALE_TABLE[i][colNum - 1], number)){
+            gpa = OMSAS_SCALE_TABLE[i][0]
+        }
+    }
+    return gpa
+}
+
+function numberInRange(rangeString, number){
+    if (rangeString.includes("≤")){
+        return number <= 49
+    }
+    else {
+        return number >= rangeString.substring(0,2) && number <= rangeString.substring(3,)
+    }
+}
+
+function calculateCGPA(){
+
 }
