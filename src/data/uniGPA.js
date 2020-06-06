@@ -1,5 +1,3 @@
-import { SourceCode } from "eslint"
-
 export const OMSAS_SCALE_TABLE = [
     ["4.00","9","8","90–100","93–100","94–100","94–100","A+","A","A+"  ],
     ["3.90","","","85–89","84–92","87–93","85–93","A","",""  ],
@@ -17,7 +15,7 @@ export const OMSAS_SCALE_TABLE = [
     ["0.00","3","1","≤ 49","≤ 49","≤ 49","≤ 49","E/F","E/F","E/F"  ]
 ]
 
-Uni_List = {
+export const UniList = {
     1: {name: "Acadia University", cols: [7]}, 2: {name: "University of Alberta", cols: [7]}, 3: {name: "Algoma University", cols: [3]},
     4: {name: "Athabasca University", cols: [7]}, 5: {name: "Bishop's University", cols: [3]}, 6: {name: "Brandon University", cols: [7]},
     7: {name: "Brock University", cols: [3]}, 8: {name: "University of Calgary", cols: [7]}, 9: {name: "Cape Breton University", cols: [3]},
@@ -40,7 +38,7 @@ Uni_List = {
     58: {name: "York University", cols: [9]}
 }
 
-const medSchools = {
+export const medSchools = {
     1: {name: "University of Toronto"},
     2: {name: "Northern Ontario School of Medicine"},
     3: {name: "Michael G. Degroote School of Medicine (McMaster University)"},
@@ -50,8 +48,8 @@ const medSchools = {
 }
 
 
-function convertGradeToGPA(schoolCode, grade, isPercentage){
-    const convColNums = Uni_List[schoolCode].cols
+export function convertGradeToGPA(schoolCode, grade, isPercentage){
+    const convColNums = UniList[schoolCode].cols
     // Case where a grade can be both letter or percentage
     if (convColNums.length > 1){
         if (isPercentage){
@@ -94,6 +92,3 @@ function numberInRange(rangeString, number){
     }
 }
 
-function calculateCGPA(){
-
-}
