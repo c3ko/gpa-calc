@@ -1,7 +1,6 @@
 <template>
   <div id="app" class="">
     <Navbar />
-    <GradeList />
   </div>
 </template>
 
@@ -9,7 +8,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Navbar from './components/Navbar.vue'
-import GradeList from './components/GradeList'
 
 
 Vue.use(Vuex)
@@ -31,7 +29,7 @@ export default {
   name: 'App',
   components: {
     Navbar,
-    GradeList
+    
   },
   store
 }
