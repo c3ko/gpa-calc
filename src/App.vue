@@ -1,6 +1,9 @@
 <template>
   <div id="app" class="">
     <Navbar />
+    <div class="container px-4 mx-auto">
+      <PriorSchools />
+    </div>
   </div>
 </template>
 
@@ -8,7 +11,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Navbar from './components/Navbar.vue'
-
+import PriorSchools from './components/PriorSchools'
 
 Vue.use(Vuex)
 
@@ -29,7 +32,7 @@ export default {
   name: 'App',
   components: {
     Navbar,
-    
+    PriorSchools
   },
   store
 }
