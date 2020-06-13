@@ -1,13 +1,14 @@
 <template>
   <div>
-      <h2 class="mb-2 text-gray-800 font-sarif font-semibold text-xl">Post Secondary Schools Attended</h2>
+      <h2 class="mt-4 mb-2 text-gray-800 font-sarif font-semibold text-xl">Post Secondary Schools Attended</h2>
       <p class="text-gray-500">Add ALL universities attended below along with ALL courses taken</p>
       <ul class="mt-8">
-        <li>
-          <PriorSchoolCard />
+
+        <li v-for="school in schools" v-bind:key="school.id">
+          <PriorSchoolCard v-bind:schoolId="school.id" v-bind:OMSASID="school.OMSASID"/>
         </li>
       </ul>
-      <button class="btn btn-green-outline">Add another School</button>
+      <button v-on:click="addNewSchool" class="btn btn-green-outline">Add another School</button>
   </div>
 </template>
 
@@ -15,8 +16,26 @@
 import PriorSchoolCard from './PriorSchoolCard'
 export default {
   name: 'PriorSchool',
+  
+  created : function() {
+
+  },
+
+  computed: {
+    schools() {
+      return this.$store.state.schoolsAdded
+    },
+
+  },
+
   components: {
     PriorSchoolCard
+  },
+  methods: {
+    addNewSchool: function() {
+      this.$store.commit('addNewSchool')
+      console.log(Object.values(this.$store.state.schoolsAdded))
+    }
   }
 }
 </script>

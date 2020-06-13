@@ -16,14 +16,13 @@ import PriorSchools from './components/PriorSchools'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  schoolsId: 0,
-  yearsId: 0,
-  coursesId: 0,
   state: {
+    schoolsId: 1, // 0 reserved for initial prior school entry
+    yearsId: 0,
+    coursesId: 0,
+
     schoolsAdded: {
-      0: {
-        years: [] //year ids
-      }
+
     },
     yearsAdded: {
       
@@ -35,12 +34,13 @@ const store = new Vuex.Store({
 
   },
   mutations: {
-    addNewSchool: function (state, OMSASID) {
-      
-      state.schoolsAdded[state.schoolsId] = {
-        OMSASID,
+    addNewSchool: function (state) {
+      Vue.set(state.schoolsAdded, state.schoolsId, {
+        id: state.schoolsId,
+        OMSASID: null,
         years: []
-      }
+      })
+
       state.schoolsId++
     },
 
@@ -61,6 +61,10 @@ const store = new Vuex.Store({
     addYear: function (state, schoolID) {
       
       state.schoolsAdded[schoolID].years.push(state.yearsId)
+      state.yearsAdded[state.yearsId] = {
+        id: state.yearsId,
+        courses: []
+      }
       state.yearsId++
     },
 
@@ -75,6 +79,12 @@ const store = new Vuex.Store({
     addCourse: function(state, yearID) {
       
       state.yearsAdded[yearID].courses.push(state.coursesId)
+      state.coursesAdded[state.coursesAdded] = {
+        id: state.coursesAdded,
+        courseName: '',
+        courseWeight: '',
+        courseMark: ''
+      }
       state.coursesId++
     },
 
@@ -93,8 +103,12 @@ const store = new Vuex.Store({
     removeCourse: function(state, courseID) {
       delete state.coursesAdded[courseID]
     } 
+  },
 
-    
+  getters: {
+    schools : state => Object.values(state.schoolsAdded),
+    years: state => Object.values(state.yearsAdded),
+    courses: state => Object.values(state.coursesAdded)
   }
 })
 

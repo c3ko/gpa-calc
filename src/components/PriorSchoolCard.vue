@@ -9,7 +9,7 @@
         <div class="inline-block mt-2 relative w-3/4">
             <select id="school-select" v-model="selectedSchool" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
             <option value="" disabled selected>Select Institution...</option>
-            <option v-for="schoolName in schoolNames" :key="schoolName">{{ schoolName }}</option>
+            <option v-bind:value="{ id: school.id, name: school.name }" v-for="school in schools" :key="school.id">{{ school.name }}</option>
             </select>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -28,27 +28,33 @@
 import { UniList } from '../data/uniGPA'
 export default {
   name: 'PriorSchoolCard',
+  props: [
+    'schoolId',
+    'schoolName',
+  ],
   data () {
     return {
-      schoolNames: Object.values(UniList).map(uni => uni.name).sort(),
+      schools: Object.values(UniList).sort((a, b) => (a.name > b.name) ? 1: -1),
       selectedSchool: '',
       initialSchoolSelect: false,
+      yearsAdded: Object.values(this.$store.state.yearsAdded),
+      coursesAdded: Object.values(this.$store.state.yearsAdded)
     }
   },
   methods: {
 
   },
   created: function () {
-    console.log(this.$store)
+    
   },
   watch: {
       selectedSchool: function (val){
-          if (val.length > 0){
 
+          if (val.name.length > 0){
+            
             if (!this.initialSchoolSelect){
-              this.$store.commit("addNewSchool")
-              this.initialSchoolSelect = true
-              console.log(this.initialSchoolSelect)
+              this.initialSchoolSelect = true              
+              this.$store.commit("changeSchool", this.schoolId, val.id)
             }
           }
       }
