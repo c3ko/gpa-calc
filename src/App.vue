@@ -17,7 +17,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    schoolsId: 1, // 0 reserved for initial prior school entry
+    schoolsId: 0, // 0 reserved for initial prior school entry
     yearsId: 0,
     coursesId: 0,
 
@@ -44,9 +44,8 @@ const store = new Vuex.Store({
       state.schoolsId++
     },
 
-    changeSchool: function (state, schoolID, newOMSASID) {
-      state.schoolsAdded[schoolID].OMSASID = newOMSASID
-      
+    changeSchool: function (state, { schoolId, OMSASID }) {
+      state.schoolsAdded[schoolId].OMSASID = OMSASID
     },
     
     removeSchool: function (state, schoolID) {

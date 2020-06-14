@@ -51,10 +51,13 @@ export default {
       selectedSchool: function (val){
 
           if (val.name.length > 0){
-            
+            const schoolId = this.schoolId
+            const OMSASID = val.id
+            console.log("School ID: ", this.schoolId, " OMSASID: ", val.id)              
+            this.$store.commit("changeSchool", { schoolId, OMSASID })
             if (!this.initialSchoolSelect){
-              this.initialSchoolSelect = true              
-              this.$store.commit("changeSchool", this.schoolId, val.id)
+              this.initialSchoolSelect = true
+
             }
           }
       }
