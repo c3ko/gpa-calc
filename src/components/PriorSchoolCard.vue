@@ -2,7 +2,7 @@
   <div class="bg-gray-200 w-full my-4 py-2 lg:max-w-full border border-gray-400">
       <div class="flex px-8 border-b border-gray-400 items-center justify-between">
         <h3 class="text-md py-2 font-medium text-grey-800">Prior School</h3>
-        <button><img class="w-4 h-4" src="/img/close.svg" alt="close" /></button>
+        <button v-on:click="deleteHandler"><img class="w-4 h-4" src="/img/close.svg" alt="close" /></button>
       </div>
       <div class="flex flex-wrap md:flex-no-wrap mt-4 px-8 items-center">
         <label class="mr-2 mt-2 bg-gray-100 border border-gray-400 rounded p-2 text-sm font-semibold" for="school-select">Institution</label>
@@ -42,7 +42,11 @@ export default {
     }
   },
   methods: {
-
+    deleteHandler: function (event) {
+      if (event) {
+        this.$store.commit("removeSchool", this.schoolId)
+      }
+    }
   },
   created: function () {
     

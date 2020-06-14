@@ -53,7 +53,8 @@ const store = new Vuex.Store({
         store.commit('removeYear', yearId)
       })
 
-      delete state.schoolsAdded[schoolID]
+      //delete state.schoolsAdded[schoolID]
+      Vue.delete(state.schoolsAdded, schoolID)
  
     },
 
@@ -72,6 +73,7 @@ const store = new Vuex.Store({
           
           store.commit('removeCourse', courseId)
         })
+        Vue.delete(state.yearsAdded, yearID)
     },
 
     
@@ -87,20 +89,21 @@ const store = new Vuex.Store({
       state.coursesId++
     },
 
-    changeCourseName: function(state, courseID, courseName) {
+    changeCourseName: function(state, { courseID, courseName }) {
       state.coursesAdded[courseID].courseName = courseName
     },
 
-    changeCourseWeight: function(state, courseID, courseWeight) {
+    changeCourseWeight: function(state, { courseID, courseWeight} ) {
       state.coursesAdded[courseID].courseWeight = courseWeight
     },
 
-    changeCourseMark: function(state, courseID, courseMark) {
+    changeCourseMark: function(state, { courseID, courseMark }) {
       state.coursesAdded[courseID].courseMark = courseMark
     },
 
     removeCourse: function(state, courseID) {
-      delete state.coursesAdded[courseID]
+      //delete state.coursesAdded[courseID]
+      Vue.delete(state.coursesAdded, courseID)
     } 
   },
 
