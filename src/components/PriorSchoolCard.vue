@@ -12,22 +12,27 @@
             <option v-bind:value="{ id: school.id, name: school.name }" v-for="school in schools" :key="school.id">{{ school.name }}</option>
             </select>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
             </div>
         </div>
       </div>
       <ul v-if="initialSchoolSelect" class="">
-          <li class="">
+          <li class="" v-for="year in years" :key="year.id">
           </li>
       </ul>
+      <GradeList />
 
   </div>
 </template>
 
 <script>
 import { UniList } from '../data/uniGPA'
+import GradeList from './GradeList'
 export default {
   name: 'PriorSchoolCard',
+  components: {
+    GradeList,
+  },
   props: [
     'schoolId',
     'schoolName',
@@ -39,6 +44,15 @@ export default {
       initialSchoolSelect: false,
       yearsAdded: Object.values(this.$store.state.yearsAdded),
       coursesAdded: Object.values(this.$store.state.yearsAdded)
+    }
+  },
+
+  computed: {
+    years(){
+      return Object.values(this.$store.state.yearsAdded)
+    },
+    courses(){ 
+      return Object.values(this.$store.state.coursesAdded)
     }
   },
   methods: {
@@ -61,7 +75,7 @@ export default {
             this.$store.commit("changeSchool", { schoolId, OMSASID })
             if (!this.initialSchoolSelect){
               this.initialSchoolSelect = true
-
+              this.$store.commit("addYear", schoolId);
             }
           }
       }

@@ -53,7 +53,6 @@ const store = new Vuex.Store({
         store.commit('removeYear', yearId)
       })
 
-      //delete state.schoolsAdded[schoolID]
       Vue.delete(state.schoolsAdded, schoolID)
  
     },
@@ -61,16 +60,18 @@ const store = new Vuex.Store({
     addYear: function (state, schoolID) {
       
       state.schoolsAdded[schoolID].years.push(state.yearsId)
-      state.yearsAdded[state.yearsId] = {
+      Vue.set(state.yearsAdded, state.yearsId, {
         id: state.yearsId,
         courses: []
-      }
+      })
+
+      for(var i = 0; i < 5; i++)
+        store.commit("addCourse". state.yearsId)
       state.yearsId++
     },
 
     removeYear: function(state, yearID) {
-        state.yearsAdded[yearID].courses.map(courseId => {
-          
+        state.yearsAdded[yearID].courses.map(courseId => {   
           store.commit('removeCourse', courseId)
         })
         Vue.delete(state.yearsAdded, yearID)
@@ -80,12 +81,12 @@ const store = new Vuex.Store({
     addCourse: function(state, yearID) {
       
       state.yearsAdded[yearID].courses.push(state.coursesId)
-      state.coursesAdded[state.coursesAdded] = {
+      Vue.set(state.coursesAdded, state.coursesAdded, {
         id: state.coursesAdded,
         courseName: '',
         courseWeight: '',
         courseMark: ''
-      }
+      })
       state.coursesId++
     },
 
@@ -102,7 +103,6 @@ const store = new Vuex.Store({
     },
 
     removeCourse: function(state, courseID) {
-      //delete state.coursesAdded[courseID]
       Vue.delete(state.coursesAdded, courseID)
     } 
   },

@@ -9,7 +9,12 @@
 <script>
 import CheckBox from './CheckBox'
 export default {
-
+    name: 'GradeList',
+    data () {
+        return {
+            
+        }
+    }
 }
 </script>
 
