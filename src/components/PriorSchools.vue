@@ -16,7 +16,6 @@
 import PriorSchoolCard from './PriorSchoolCard'
 export default {
   name: 'PriorSchool',
-  
   created : function() {
 
   },
@@ -33,7 +32,7 @@ export default {
   },
   methods: {
     addNewSchool: function() {
-      this.$store.commit('addNewSchool')
+      this.$store.commit('addNewSchool', this.year)
       console.log(Object.values(this.$store.state.schoolsAdded))
     }
   }

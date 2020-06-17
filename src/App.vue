@@ -40,7 +40,7 @@ const store = new Vuex.Store({
         OMSASID: null,
         years: []
       })
-
+      
       state.schoolsId++
     },
 
@@ -66,11 +66,14 @@ const store = new Vuex.Store({
       })
 
       for(var i = 0; i < 5; i++)
-        store.commit("addCourse". state.yearsId)
+        store.commit("addCourse", state.yearsId)
+
       state.yearsId++
     },
 
-    removeYear: function(state, yearID) {
+    removeYear: function(state, { schoolID, yearID }) {
+        state.schoolsId[schoolID].years.splice(-1, 1)
+
         state.yearsAdded[yearID].courses.map(courseId => {   
           store.commit('removeCourse', courseId)
         })
@@ -102,7 +105,11 @@ const store = new Vuex.Store({
       state.coursesAdded[courseID].courseMark = courseMark
     },
 
-    removeCourse: function(state, courseID) {
+    removeCourse: function(state, { yearID, courseID}) {
+      for(var i = state.yearsAdded[yearID].courses.length - 1; i >= 0; i--){
+        if (state.yearsAdded[yearID].courses[i].courseID === courseID)
+          state.yearsAdded[yearID].courses.splice(i, 1)
+      }
       Vue.delete(state.coursesAdded, courseID)
     } 
   },

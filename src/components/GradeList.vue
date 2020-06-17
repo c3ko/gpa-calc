@@ -1,5 +1,5 @@
 <template>
-    <table class="table-auto mx-auto lg:max-w-full w-3/4 my-4 bg-white border rounded border-gray-400">
+    <table class="table-auto mx-auto  w-3/4 my-4 bg-white border rounded border-gray-400">
         <thead>
             <tr>
                 <th class="px-2 text-center w-1 py-4 border rounded border-gray-400"><CheckBox /></th>
@@ -12,7 +12,10 @@
         <tbody class="">
             <tr v-for="course in courseList" :key="course">
                 <td class="px-2 border border-gray-400 py-2"><CheckBox /></td>
-                <td class="border rounded border-l-0 border-gray-400 font-normal text-gray-700 px-4 py-2">{{ course.courseName }}</td>
+                <td class="border rounded border-l-0 border-gray-400 font-normal text-gray-700 px-4 py-2">
+                    <input class="p-0" type="text" >
+                    
+                </td>
                 <td class="border rounded px-4 border-gray-400 py-2">{{ course.courseWeight }}</td>
                 <td class="border rounded px-4 border-gray-400 py-2">{{ course.courseMark }}</td>
             </tr>
