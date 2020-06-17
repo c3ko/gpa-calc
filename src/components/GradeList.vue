@@ -10,7 +10,7 @@
         </thead>
             
         <tbody class="">
-            <tr v-for="course in courseList" :key="course">
+            <tr v-for="course in courseList" :key="course.id">
                 <td class="px-2 border border-gray-400 py-2"><CheckBox /></td>
                 <td class="border rounded border-l-0 border-gray-400 font-normal text-gray-700 px-4 py-2">
                     <input class="p-0" type="text" >

@@ -65,7 +65,13 @@ export default {
 
   computed: {
     years(){
-      return Object.values(this.$store.state.yearsAdded).sort()
+      let yearsList = []
+      for (let [, value] of Object.entries(this.$store.state.yearsAdded)) {
+        if (value.schoolId === this.schoolId)
+          yearsList.push(value)
+      }
+      return yearsList
+    
     },
     courses(){ 
       return Object.values(this.$store.state.coursesAdded)
@@ -92,7 +98,6 @@ export default {
           if (val.name.length > 0){
             const schoolId = this.schoolId
             const OMSASID = val.id
-            console.log("School ID: ", this.schoolId, " OMSASID: ", val.id)              
             this.$store.commit("changeSchool", { schoolId, OMSASID })
             if (!this.initialSchoolSelect){
               this.initialSchoolSelect = true

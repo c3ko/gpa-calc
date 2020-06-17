@@ -62,6 +62,7 @@ const store = new Vuex.Store({
       state.schoolsAdded[schoolID].years.push(state.yearsId)
       Vue.set(state.yearsAdded, state.yearsId, {
         id: state.yearsId,
+        schoolId: schoolID,
         courses: []
       })
 

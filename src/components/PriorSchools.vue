@@ -33,7 +33,6 @@ export default {
   methods: {
     addNewSchool: function() {
       this.$store.commit('addNewSchool', this.year)
-      console.log(Object.values(this.$store.state.schoolsAdded))
     }
   }
 }
