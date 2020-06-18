@@ -50,7 +50,7 @@ const store = new Vuex.Store({
     
     removeSchool: function (state, schoolID) {
       state.schoolsAdded[schoolID].years.map(yearId => {
-        store.commit('removeYear', yearId)
+        store.commit('removeYear', {schoolID, yearId})
       })
 
       Vue.delete(state.schoolsAdded, schoolID)
@@ -73,11 +73,7 @@ const store = new Vuex.Store({
     },
 
     removeYear: function(state, { schoolID, yearID }) {
-        state.schoolsId[schoolID].years.splice(-1, 1)
-
-        state.yearsAdded[yearID].courses.map(courseId => {   
-          store.commit('removeCourse', courseId)
-        })
+        state.schoolsId[schoolID]
         Vue.delete(state.yearsAdded, yearID)
     },
 
@@ -85,8 +81,9 @@ const store = new Vuex.Store({
     addCourse: function(state, yearID) {
       
       state.yearsAdded[yearID].courses.push(state.coursesId)
-      Vue.set(state.coursesAdded, state.coursesAdded, {
-        id: state.coursesAdded,
+      Vue.set(state.coursesAdded, state.coursesId, {
+        id: state.coursesId,
+        yearId: yearID,
         courseName: '',
         courseWeight: '',
         courseMark: ''

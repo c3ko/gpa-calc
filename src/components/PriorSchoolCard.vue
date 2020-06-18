@@ -31,7 +31,7 @@
             <h4 class="text-center font-semibold text-gray-800">
               Courses
             </h4>
-            <GradeList />
+            <GradeList v-bind:yearId="year.id"/>
           </li>
           <button v-on:click="addYearHandler" class="btn btn-green-outline mx-8">Add Year</button>
       </ul>

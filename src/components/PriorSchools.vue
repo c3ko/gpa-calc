@@ -8,7 +8,7 @@
           <PriorSchoolCard v-bind:schoolId="school.id" v-bind:OMSASID="school.OMSASID"/>
         </li>
       </ul>
-      <button v-on:click="addNewSchool" class="btn btn-green-outline">Add another School</button>
+      <button v-on:click="addNewSchool" class="btn btn-green-outline mb-4">Add another School</button>
   </div>
 </template>
 
