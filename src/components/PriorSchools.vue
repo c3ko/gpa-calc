@@ -1,6 +1,6 @@
 <template>
-  <div>
-      <h2 class="mt-4 mb-2 text-gray-800 font-sarif font-semibold text-xl">Post Secondary Schools Attended</h2>
+  <div id="previous-schools">
+      <h2 id="previous-heading" class="mt-4 mb-2 text-gray-800 font-sarif font-semibold text-xl">Post Secondary Schools Attended</h2>
       <p class="text-gray-500">Add ALL universities attended below along with ALL courses taken</p>
       <ul class="mt-8">
 

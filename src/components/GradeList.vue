@@ -1,5 +1,5 @@
 <template>
-    <table class="table mx-auto  w-3/4 my-4 bg-white border rounded border-gray-400">
+    <table class="table mx-auto w-3/4 my-4 bg-white border rounded border-gray-400">
         <thead>
             <tr>
                 <th class="px-2 text-center w-1 py-4 border rounded border-gray-400"><CheckBox /></th>
@@ -16,10 +16,10 @@
                     <input class="w-full" type="text" >
                 </td>
                 <td class="border rounded border-gray-400">
-                    <input class="p-0 w-full" type="text" >
+                    <input class="w-full" type="text" >
                 </td>
                 <td class="border rounded border-gray-400">
-                    <input class="p-0 w-full" type="text" >
+                    <input class="w-full" type="text" >
                 </td>
             </tr>
         </tbody>
@@ -27,11 +27,18 @@
 </template>
 
 <script>
-//import GradeListItem from './GradeListItem'
 import CheckBox from './CheckBox'
 export default {
     name: 'GradeList',
     props: ['yearId'],
+    data () {
+        return {
+            checkAll: false,
+            checkedIndices: []
+        }
+       
+
+    },
     components: {
         CheckBox,
     },

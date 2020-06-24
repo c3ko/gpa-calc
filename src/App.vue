@@ -1,9 +1,13 @@
 <template>
-  <div id="app" class="">
+  <div id="app" >
     <Navbar />
-    <div class="container px-4 mx-auto max-w-3xl">
-      <PriorSchools />
-    </div>
+    <main id="main" class="container flex mx-auto max-w-6xl">
+            <ProgressSideBar />
+      <div id="schools-container" class="flex flex-col mt-24 pt-4 px-4"> 
+        <PriorSchools />
+        <FutureSchools />
+      </div>
+    </main>
   </div>
 </template>
 
@@ -12,6 +16,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Navbar from './components/Navbar.vue'
 import PriorSchools from './components/PriorSchools'
+import ProgressSideBar from './components/ProgressSideBar'
+import FutureSchools from './components/FutureSchools'
 
 Vue.use(Vuex)
 
@@ -123,7 +129,9 @@ export default {
   name: 'App',
   components: {
     Navbar,
-    PriorSchools
+    PriorSchools,
+    ProgressSideBar,
+    FutureSchools
   },
   store
 }

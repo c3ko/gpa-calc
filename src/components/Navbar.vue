@@ -1,11 +1,11 @@
 <template>
   <header>
-    <nav class="flex items-center justify-between flex-wrap p-6 border-b border-gray-300">
+    <nav class="navbar">
         <div class="flex items-center flex-shrink-0 text-white mr-6">
           <img class="h-8 w-8 mr-2" src="/img/calc_2.png" alt="Getting.In"/>
           <p class="text-blue-300 md:text-3xl sm:text-md uppercase tracking-tight font-bold">Getting.In</p>
         </div>
-        <div class="block md:hidden">
+        <div class="block md:hidden ">
             <button 
                 v-on:click="toggleMenu"
                 class="flex items-center px-3 py-2 border rounded text-blue-200 border-blue-400 hover:font-semibold hover:text-blue-400 hover:border-blue-700 hover:border-4">
@@ -16,15 +16,15 @@
             v-bind:class="{ hidden: isHidden }"
         >
             <div class="text-sm md:flex-grow">
-            <a href="#responsive-header" class="block mt-4 md:inline-block md:mt-0 text-blue-500 hover:text-white mr-4">
-                New Features
-            </a>
-            <a href="#responsive-header" class="block mt-4 md:inline-block md:mt-0 text-blue-500 hover:text-white mr-4">
-                How It Works
-            </a>
-            <a href="#responsive-header" class="block mt-4 md:inline-block md:mt-0 text-blue-500 hover:text-white">
-                Blog
-            </a>
+                <a href="#responsive-header" class="block mt-4 md:inline-block md:mt-0 text-blue-500 hover:text-white mr-4">
+                    New Features
+                </a>
+                <a href="#responsive-header" class="block mt-4 md:inline-block md:mt-0 text-blue-500 hover:text-white mr-4">
+                    How It Works
+                </a>
+                <a href="#responsive-header" class="block mt-4 md:inline-block md:mt-0 text-blue-500 hover:text-white">
+                    Blog
+                </a>
             </div>
             <div class="flex flex-col md:flex-row">
                 <button class="hidden md:block btn btn-outline mr-4">Save</button>
@@ -55,6 +55,11 @@ export default {
 </script>
 
 <style>
+
+ .navbar {
+     @apply fixed flex items-center h-24 bg-gray-100 justify-between flex-wrap p-6 border-b border-gray-300 mt-0 fixed w-full z-10 top-0;
+     
+ }
   .btn {
     @apply font-semibold py-2 px-6 rounded;
   }
