@@ -3,7 +3,7 @@
     <Navbar />
     <main id="main" class="container flex mx-auto max-w-6xl">
             <ProgressSideBar />
-      <div id="schools-container" class="flex flex-col mt-24 pt-4 px-4"> 
+      <div id="schools-container" class="flex flex-col mt-24 px-4"> 
         <PriorSchools />
         <FutureSchools />
       </div>
@@ -18,6 +18,8 @@ import Navbar from './components/Navbar.vue'
 import PriorSchools from './components/PriorSchools'
 import ProgressSideBar from './components/ProgressSideBar'
 import FutureSchools from './components/FutureSchools'
+
+//import { calcCGPA } from './data/uniGPA'
 
 Vue.use(Vuex)
 
@@ -36,7 +38,9 @@ const store = new Vuex.Store({
 
     coursesAdded: {
 
-    }
+    },
+
+    cGPA: null
 
   },
   mutations: {
@@ -69,6 +73,8 @@ const store = new Vuex.Store({
       Vue.set(state.yearsAdded, state.yearsId, {
         id: state.yearsId,
         schoolId: schoolID,
+        yearInterval: null,
+        gpa: null,
         courses: []
       })
 
@@ -83,6 +89,9 @@ const store = new Vuex.Store({
         Vue.delete(state.yearsAdded, yearID)
     },
 
+    changeYearInterval: function(state, { yearID, yearInterval }) {
+      state.yearsAdded[yearID].yearInterval = yearInterval
+    },
     
     addCourse: function(state, yearID) {
       
@@ -119,9 +128,12 @@ const store = new Vuex.Store({
   },
 
   getters: {
-    schools : state => Object.values(state.schoolsAdded),
-    years: state => Object.values(state.yearsAdded),
-    courses: state => Object.values(state.coursesAdded)
+    cGPA: state => {
+      return state
+    },
+    annualGPA: state => {
+      return state
+    }
   }
 })
 
@@ -141,4 +153,5 @@ export default {
   html {
     scroll-behavior: smooth;
   }
+
 </style>

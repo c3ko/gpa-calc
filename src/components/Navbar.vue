@@ -57,7 +57,7 @@ export default {
 <style>
 
  .navbar {
-     @apply fixed flex items-center h-24 bg-gray-100 justify-between flex-wrap p-6 border-b border-gray-300 mt-0 fixed w-full z-10 top-0;
+     @apply flex items-center h-24 bg-gray-100 justify-between flex-wrap p-6 border-b border-gray-300 mt-0 fixed w-full z-10 top-0;
      
  }
   .btn {

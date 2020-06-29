@@ -13,13 +13,13 @@
             <tr v-for="course in courses" :key="course.id">
                 <td class="px-2 border border-gray-400 py-2"><CheckBox /></td>
                 <td class="border rounded border-l-0 border-gray-400 font-normal text-gray-700">
-                    <input class="w-full" type="text" >
+                    <input v-bind:data-key="course.id" :value="course.courseName" @input="changeCourseName" class="w-full" type="text" >
                 </td>
                 <td class="border rounded border-gray-400">
-                    <input class="w-full" type="text" >
+                    <input v-bind:data-key="course.id" class="w-full" :value="course.courseMark" @input="changeCourseMark" type="text" >
                 </td>
                 <td class="border rounded border-gray-400">
-                    <input class="w-full" type="text" >
+                    <input v-bind:data-key="course.id" class="w-full" :value="course.courseWeight" @input="changeCourseWeight" type="text" >
                 </td>
             </tr>
         </tbody>
@@ -46,7 +46,29 @@ export default {
         courses(){ 
             return Object.values(this.$store.state.coursesAdded).filter(course => course.yearId === this.$props.yearId)
         }
-  },
+    },
+
+    methods: {
+        changeCourseName: function(event) {
+            if (event) {
+                console.log("Id", event.target.getAttribute('data-key'), " value: " , event.target.value)
+                this.$store.commit("changeCourseName", { courseID: event.target.getAttribute('data-key'), courseName: event.target.value })
+            }
+        },
+        changeCourseWeight: function(event) {
+            if (event) {
+                console.log("Id", event.target.getAttribute('data-key'), " value: " , event.target.value)
+                this.$store.commit("changeCourseWeight", { courseID: event.target.getAttribute('data-key'), courseWeight: event.target.value })
+            }
+        },
+        changeCourseMark: function(event) {
+            if (event) {
+                console.log("Id", event.target.getAttribute('data-key'), " value: " , event.target.value)
+                this.$store.commit("changeCourseMark", { courseID: event.target.getAttribute('data-key'), courseMark: event.target.value })
+            }
+        },
+    }
+  
 }
 </script>
 

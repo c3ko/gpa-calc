@@ -39,12 +39,12 @@ export const UniList = {
 }
 
 export const medSchools = {
-    1: {name: "University of Toronto"},
-    2: {name: "Northern Ontario School of Medicine"},
-    3: {name: "Michael G. Degroote School of Medicine (McMaster University)"},
-    4: {name: "University of Ottawa"},
-    5: {name: "Queen's University"},
-    6: {name: "Schulich School of Medicine & Dentistry(Western University)"}
+    1: {id: 1, name: "University of Toronto", shortName: 'Toronto'},
+    2: {id: 2, name: "Northern Ontario School of Medicine", shortName: 'Northern Ontario'},
+    3: {id: 3, name: "Michael G. Degroote School of Medicine (McMaster University)", shortName: 'McMaster'},
+    4: {id: 4, name: "University of Ottawa", shortName: 'Ottawa'},
+    5: {id: 5, name: "Queen's University", shortName: "Queen's"},
+    6: {id: 6, name: "Schulich School of Medicine & Dentistry(Western University)", shortName: "Western"}
 }
 
 
@@ -66,11 +66,12 @@ export function convertGradeToGPA(schoolCode, grade, isPercentage){
 function getLetterGPA(letter, colNum){
     let gpa = "0.00"
     for(let i = 0; i < OMSAS_SCALE_TABLE.length; i++){
-        if (OMSAS_SCALE_TABLE[i][colNum - 1] === letter){
+        if (OMSAS_SCALE_TABLE[i][colNum - 1] === letter.toUpperCase()){
             gpa = OMSAS_SCALE_TABLE[i][0]
         }
     }
     return gpa
+    
 }
 function getRangeGPA(number, colNum){
     // Check col of each row in table for correct range and return corresponding GPA
@@ -90,5 +91,14 @@ function numberInRange(rangeString, number){
     else {
         return number >= rangeString.substring(0,2) && number <= rangeString.substring(3,)
     }
+}
+
+export function calcCGPA(courseList, schoolCode, isPercentage) {
+    let sum = 0.00;
+    courseList.array.forEach(course => {
+        sum += convertGradeToGPA(schoolCode, course.courseMark, isPercentage)
+    });
+
+    return sum / courseList.length
 }
 
