@@ -30,6 +30,9 @@
                     <input v-bind:data-key="course.id" :value="course.courseMark" @input="changeCourseMark" type="text" class="w-full block appearance-none bg-white px-4 py-2 leading-tight focus:outline-none focus:shadow-outline" >
                 </td>
             </tr>
+            <tr class="text-center w-full">
+                <td colspan="4" class="py-2 text-center w-full item border rounded border-gray-400"><button v-on:click="addCourseHandler" class="btn btn-green-outline px-16 py-2 border border-gray-500 ">New Course</button></td>
+            </tr>
         </tbody>
     </table>
 </template>
@@ -59,6 +62,10 @@ export default {
     },
 
     methods: {
+        addCourseHandler: function (event){
+            if (event)
+                this.$store.commit('addCourse', this.$props.yearId)
+        },
         changeCourseName: function(event) {
             if (event) {
                 console.log("Id", event.target.getAttribute('data-key'), " value: " , event.target.value)
