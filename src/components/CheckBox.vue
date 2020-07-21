@@ -9,7 +9,23 @@
 
 <script>
 export default {
+  name: 'CheckBox',
+  props: ['courseID'],
 
+  methods: {
+    setCourseChecked: function() {
+
+    },
+    setAllCoursesChecked() {
+
+    }
+  },
+
+  computed: {
+    isChecked: function (){
+      return false;
+    }
+  }
 }
 </script>
 

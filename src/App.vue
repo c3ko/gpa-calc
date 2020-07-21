@@ -18,8 +18,8 @@ import Navbar from './components/Navbar.vue'
 import PriorSchools from './components/PriorSchools'
 import ProgressSideBar from './components/ProgressSideBar'
 import FutureSchools from './components/FutureSchools'
-
 //import { calcCGPA } from './data/uniGPA'
+
 
 Vue.use(Vuex)
 
@@ -128,13 +128,25 @@ const store = new Vuex.Store({
   },
 
   getters: {
+    /*
     cGPA: state => {
-      return state
+      // For each school calculate cGPA across all years
+      state.schoolsAdded(school => {
+        let courseList = state.yearsAdded[school.id]
+      })
+      let courseList = Object.values(state.coursesAdded).map(course => course.courseMark)
+      return calcCGPA(courseList)
     },
     annualGPA: state => {
-      return state
+      // For each school calcute annual GPA for each year
+      state.schoolsAdded(school => {
+
+      })
+      return state.yearsAdded
     }
+    */
   }
+  
 })
 
 export default {

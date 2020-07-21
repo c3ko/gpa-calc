@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:id="prevId" class="bg-gray-200 w-full my-4 py-2 lg:max-w-full border border-gray-400">
+  <div v-bind:id="prevId" class="px-8 bg-gray-200 my-4 py-2 lg:max-w-full border border-gray-400">
       <div class="flex px-8 border-b border-gray-400 items-center justify-between">
         <h3 class="text-md py-2 font-medium text-grey-800">Prior School</h3>
         <button v-on:click="deleteHandler"><img class="w-4 h-4" src="/img/close.svg" alt="close" /></button>
@@ -16,9 +16,9 @@
             </div>
         </div>
       </div>
-      <ul class=" my-6" v-if="initialSchoolSelect">
+      <ul class="my-6" v-if="initialSchoolSelect">
           <li class="" v-for="year in years" :key="year.id">
-            <div class="flex flex-wrap md:flex-no-wrap mt-4 px-8 items-center">
+            <div class="relative flex flex-wrap md:flex-no-wrap mt-4 px-8 items-center">
               <label class="md:mr-2 bg-gray-100 border border-gray-400 rounded p-2 text-sm font-semibold" for="year-select">Year</label>
               <select v-bind:data-key="year.id" v-model="year.yearInterval" @change="changeYearInterval" id="year-select" class="block appearance-none bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
                 <option value="" disabled selected>Select Year...</option>
