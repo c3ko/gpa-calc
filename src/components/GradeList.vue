@@ -6,6 +6,7 @@
                 <th class="px-2 text-center rounded font-bold text-gray-800 py-4 text-sm border-r border-gray-400">Course Name or Code</th>
                 <th class="px-4 text-center rounded py-4 font-bold text-gray-800 text-sm border-r border-gray-400">Credits</th>
                 <th class="px-4 text-center rounded py-4 font-bold text-gray-800 text-sm">Mark (%)</th>
+                <th class="px-4 text-center border rounded py-4 font-bold text-gray-800 text-sm"></th>
             </tr>
         </thead>
             
@@ -29,9 +30,12 @@
                 <td class="border rounded border-gray-400 w-16">
                     <input v-bind:data-key="course.id" :value="course.courseMark" @input="changeCourseMark" type="text" class="w-full block appearance-none bg-white px-4 py-2 leading-tight focus:outline-none focus:shadow-outline" >
                 </td>
+                <td class="border border-gray-400 flex items-center justify-center py-2">
+                    <button v-on:click="removeCourseHandler"><img v-bind:data-key="course.id" height="20px" width="20px" src="/img/close_2.svg" alt="close course"></button>
+                </td>
             </tr>
             <tr class="text-center w-full">
-                <td colspan="4" class="py-2 text-center w-full item border rounded border-gray-400"><button v-on:click="addCourseHandler" class="btn btn-green-outline px-16 py-2 border border-gray-500 ">New Course</button></td>
+                <td colspan="5" class="py-2 text-center w-full item border rounded border-gray-400"><button v-on:click="addCourseHandler" class="btn btn-green-outline px-16 py-2 border border-gray-500 ">New Course</button></td>
             </tr>
         </tbody>
     </table>
@@ -66,6 +70,14 @@ export default {
             if (event)
                 this.$store.commit('addCourse', this.$props.yearId)
         },
+
+        removeCourseHandler: function(event) {
+            if (event){
+                this.$store.commit('removeCourse', {yearID: this.$props.yearId, courseID: event.target.getAttribute('data-key')})
+                console.log(event.target)
+            }
+        },
+
         changeCourseName: function(event) {
             if (event) {
                 console.log("Id", event.target.getAttribute('data-key'), " value: " , event.target.value)
