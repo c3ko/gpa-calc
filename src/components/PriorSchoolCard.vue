@@ -16,12 +16,12 @@
             </div>
         </div>
       </div>
-      <ul class="my-6" v-if="initialSchoolSelect">
-          <li class="relative" v-for="year in years" :key="year.id">
-            <div class="relative flex flex-wrap md:flex-no-wrap mt-4 px-8 items-center">
-              <label class="md:mr-2 bg-gray-100 border border-gray-400 rounded p-2 text-sm font-semibold" for="year-select">Year</label>
-              <div class="inline-block mt-2 relative w-3/4">
-                <select v-bind:data-key="year.id" v-model="year.yearInterval" @change="changeYearInterval" id="year-select" class="block appearance-none bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
+      <ul class="my-4" v-if="initialSchoolSelect">
+          <li class="" v-for="year in years" :key="year.id">
+            <div class="flex flex-wrap md:flex-no-wrap px-8 items-center">
+              <label class="mr-2 mt-2 bg-gray-100 border border-gray-400 rounded p-2 text-sm font-semibold" for="year-select">Year</label>
+              <div class="inline-block mt-2 relative w-24">
+                <select v-bind:data-key="year.id" v-model="year.yearInterval" @change="changeYearInterval" id="year-select" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
                   <option value="" disabled selected>Select Year...</option>
                   <option :value="yearInterval" v-for="yearInterval in yearIntervals" :key="yearInterval">{{ yearInterval }}</option>
                 </select>

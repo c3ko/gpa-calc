@@ -2,7 +2,14 @@
     <table class="table mx-auto w-3/4 my-4 bg-white border rounded border-gray-400">
         <thead>
             <tr>
-                <th class="px-2 text-center w-1 py-4 border rounded border-gray-400"><CheckBox /></th>
+                <th class="px-2 text-center w-1 py-4 border rounded border-gray-400">
+                    <label class="custom-label flex">
+                        <div class="bg-white rounded shadow w-5 h-5 flex border border-gray-400 justify-center items-center">
+                            <input v-bind:data-key="yearId" v-on:click="toggleAllCoursesHandler" type="checkbox" class="hidden">
+                            <svg class="hidden w-4 h-4 text-green-600 pointer-events-none" viewBox="0 0 172 172"><g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/></g></svg>
+                        </div>
+                    </label>
+                </th>
                 <th class="px-2 text-center rounded font-bold text-gray-800 py-4 text-sm border-r border-gray-400">Course Name or Code</th>
                 <th class="px-4 text-center rounded py-4 font-bold text-gray-800 text-sm border-r border-gray-400">Credits</th>
                 <th class="px-4 text-center rounded py-4 font-bold text-gray-800 text-sm">Mark (%)</th>
@@ -12,7 +19,14 @@
             
         <tbody class="text-gray-900  text-sm ">
             <tr v-for="course in courses" :key="course.id">
-                <td class="px-2 border border-gray-400 py-2"><CheckBox /></td>
+                <td class="px-2 border border-gray-400 py-2">
+                    <label class="custom-label flex">
+                        <div class="bg-white rounded shadow w-5 h-5 flex border border-gray-400 justify-center items-center">
+                            <input v-bind:data-key="course.id" type="checkbox" class="hidden" v-on:click="toggleCourseHandler" v-bind:checked="course.courseChecked">
+                            <svg class="hidden w-4 h-4 text-green-600 pointer-events-none" viewBox="0 0 172 172"><g fill="none" stroke-width="none" stroke-miterlimit="10" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal"><path d="M0 172V0h172v172z"/><path d="M145.433 37.933L64.5 118.8658 33.7337 88.0996l-10.134 10.1341L64.5 139.1341l91.067-91.067z" fill="currentColor" stroke-width="1"/></g></svg>
+                        </div>
+                    </label>                   
+                </td>
                 <td class="w-64 border rounded border-l-0 border-gray-400 font-normal text-gray-700">
                     <input v-bind:data-key="course.id" :value="course.courseName" @input="changeCourseName" class="w-full block appearance-none bg-white px-4 py-2 leading-tight focus:outline-none focus:shadow-outline" type="text" >
                 </td>
@@ -42,21 +56,18 @@
 </template>
 
 <script>
-import CheckBox from './CheckBox'
 export default {
     name: 'GradeList',
     props: ['yearId'],
     data () {
         return {
             checkAll: false,
-            checkedIndices: [],
             courseWeightOptions: ['0.5', '1.0']
         }
        
 
     },
     components: {
-        CheckBox,
         
     },
     computed: {
@@ -74,30 +85,42 @@ export default {
         removeCourseHandler: function(event) {
             if (event){
                 this.$store.commit('removeCourse', {yearID: this.$props.yearId, courseID: event.target.getAttribute('data-key')})
-                console.log(event.target)
             }
         },
 
         changeCourseName: function(event) {
             if (event) {
-                console.log("Id", event.target.getAttribute('data-key'), " value: " , event.target.value)
                 this.$store.commit("changeCourseName", { courseID: event.target.getAttribute('data-key'), courseName: event.target.value })
             }
         },
-        changeCourseWeight: function(value) {
-                this.$store.commit("changeCourseWeight", { courseID: value.id, courseWeight: value.courseWeight })
+        changeCourseWeight: function(event) {
+                this.$store.commit("changeCourseWeight", { courseID: event.target.getAttribute('data-key'), courseWeight: event.target.value })
         },
         changeCourseMark: function(event) {
             if (event) {
-                console.log("Id", event.target.getAttribute('data-key'), " value: " , event.target.value)
                 this.$store.commit("changeCourseMark", { courseID: event.target.getAttribute('data-key'), courseMark: event.target.value })
             }
         },
+
+        toggleCourseHandler: function(event) {
+            if (event){
+                this.$store.commit('toggleCourse', event.target.getAttribute('data-key'))
+            }
+        },
+        toggleAllCoursesHandler: function(event) {
+            if (event){
+                console.log(event.target.checked)
+                this.$store.commit('toggleAllYearCourses', { yearID: event.target.getAttribute('data-key'), currentCheck: event.target.checked})
+            }
+        },
+    
     }
   
 }
 </script>
 
 <style>
-
+    .custom-label input:checked + svg {
+        display: block !important;
+    }
 </style>

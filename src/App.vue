@@ -78,7 +78,7 @@ const store = new Vuex.Store({
         courses: []
       })
 
-      for(var i = 0; i < 5; i++)
+      for(var i = 0; i < 10; i++)
         store.commit("addCourse", state.yearsId)
 
       state.yearsId++
@@ -101,7 +101,8 @@ const store = new Vuex.Store({
         yearId: yearID,
         courseName: '',
         courseWeight: '',
-        courseMark: ''
+        courseMark: '',
+        courseChecked: false,
       })
       state.coursesId++
     },
@@ -116,6 +117,16 @@ const store = new Vuex.Store({
 
     changeCourseMark: function(state, { courseID, courseMark }) {
       state.coursesAdded[courseID].courseMark = courseMark
+    },
+
+    toggleCourse: function(state, courseID){
+      state.coursesAdded[courseID].courseChecked = !(state.coursesAdded[courseID].courseChecked)
+    },
+
+    toggleAllYearCourses: function(state, { yearID, currentCheck }){
+      state.yearsAdded[yearID].courses.map(courseID => {
+        state.coursesAdded[courseID].courseChecked = currentCheck
+      })
     },
 
     removeCourse: function(state, { yearID, courseID}) {
