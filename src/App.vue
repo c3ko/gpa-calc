@@ -15,9 +15,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Navbar from './components/Navbar.vue'
-import PriorSchools from './components/PriorSchools'
+import PriorSchools from './components/PriorSchools/PriorSchools'
 import ProgressSideBar from './components/ProgressSideBar'
-import FutureSchools from './components/FutureSchools'
+import FutureSchools from './components/FutureSchools/FutureSchools'
 import { calcCGPA } from './data/uniGPA'
 
 

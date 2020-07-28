@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import { UniList } from '../data/uniGPA'
-import GradeList from './GradeList'
+import { UniList } from '../../data/uniGPA'
+import GradeList from '../GradeList/GradeList'
 export default {
   name: 'PriorSchoolCard',
   components: {

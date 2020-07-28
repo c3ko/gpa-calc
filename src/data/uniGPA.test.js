@@ -85,7 +85,7 @@ describe("Calculate Cumulative GPA", () => {
 
   })
 
-  it("For Multiple Schools and years", () => {
+  it("For Multiple Schools and Years", () => {
 
   })
 })
