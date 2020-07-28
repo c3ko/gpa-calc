@@ -47,6 +47,9 @@ export const medSchools = {
     6: {id: 6, name: "Schulich School of Medicine & Dentistry(Western University)", shortName: "Western"}
 }
 
+export function getColFromOMSASID() {
+    
+}
 
 export function convertGradeToGPA(schoolCode, grade, isPercentage){
     const convColNums = UniList[schoolCode].cols
@@ -63,7 +66,7 @@ export function convertGradeToGPA(schoolCode, grade, isPercentage){
     return getLetterGPA(grade, convColNums[0])
 } 
 
-function getLetterGPA(letter, colNum){
+export function getLetterGPA(letter, colNum){
     let gpa = "0.00"
     for(let i = 0; i < OMSAS_SCALE_TABLE.length; i++){
         if (OMSAS_SCALE_TABLE[i][colNum - 1] === letter.toUpperCase()){
@@ -73,7 +76,8 @@ function getLetterGPA(letter, colNum){
     return gpa
     
 }
-function getRangeGPA(number, colNum){
+
+export function getRangeGPA(number, colNum){
     // Check col of each row in table for correct range and return corresponding GPA
     let gpa = "0.00"
     for(let i = 0; i < OMSAS_SCALE_TABLE.length; i++){
@@ -84,7 +88,7 @@ function getRangeGPA(number, colNum){
     return gpa
 }
 
-function numberInRange(rangeString, number){
+export function numberInRange(rangeString, number){
     if (rangeString.includes("≤")){
         return number <= 49
     }
@@ -96,7 +100,7 @@ function numberInRange(rangeString, number){
 export function calcCGPA(courseList, schoolCode, isPercentage) {
     let sum = 0.00;
     courseList.array.forEach(course => {
-        sum += convertGradeToGPA(schoolCode, course.courseMark, isPercentage)
+        sum += (course.courseWeight * 2) * convertGradeToGPA(schoolCode, course.courseMark, isPercentage)
     });
 
     return sum / courseList.length

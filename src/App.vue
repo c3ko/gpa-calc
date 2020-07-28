@@ -18,7 +18,7 @@ import Navbar from './components/Navbar.vue'
 import PriorSchools from './components/PriorSchools'
 import ProgressSideBar from './components/ProgressSideBar'
 import FutureSchools from './components/FutureSchools'
-//import { calcCGPA } from './data/uniGPA'
+import { calcCGPA } from './data/uniGPA'
 
 
 Vue.use(Vuex)
@@ -130,32 +130,48 @@ const store = new Vuex.Store({
     },
 
     removeCourse: function(state, { yearID, courseID}) {
-      for(var i = state.yearsAdded[yearID].courses.length - 1; i >= 0; i--){
-        if (state.yearsAdded[yearID].courses[i].courseID === courseID)
-          state.yearsAdded[yearID].courses.splice(i, 1)
+      var index = state.yearsAdded[yearID].courses.indexOf(parseInt(courseID))
+      if (index > -1){
+        state.yearsAdded[yearID].courses.splice(index, 1)
       }
       Vue.delete(state.coursesAdded, courseID)
     } 
   },
 
   getters: {
-    /*
+    /* Returns { fullCGPA, schoolCGPAList }
+    - fullCGPA is the cGPA calculated for all courses listed for all schools/years.
+    - schoolscGPAList contains list with mappings { id, schoolcGPA } where schoolcGPA is cGPA calculated for all years at that school
+
+    */
     cGPA: state => {
       // For each school calculate cGPA across all years
-      state.schoolsAdded(school => {
-        let courseList = state.yearsAdded[school.id]
-      })
-      let courseList = Object.values(state.coursesAdded).map(course => course.courseMark)
-      return calcCGPA(courseList)
+
+    let schoolCoursesList = state.schoolsAdded(school => {
+        
+        let courseList = school.years.map(yearId => (
+          state.yearsAdded[yearId].courses.map(courseId => state.coursesAdded[courseId].coursemark)
+      ))
+      return { id: school.id, OMSASI: courseList }
+        
+    })
+      
+      return {fullCGPA: calcCGPA(schoolCoursesList), }
     },
+    /*
     annualGPA: state => {
       // For each school calcute annual GPA for each year
       state.schoolsAdded(school => {
 
       })
       return state.yearsAdded
+    },
+   
+    customcGPA: state => {
+
     }
     */
+    
   }
   
 })

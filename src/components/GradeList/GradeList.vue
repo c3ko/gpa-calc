@@ -84,6 +84,7 @@ export default {
 
         removeCourseHandler: function(event) {
             if (event){
+                console.log(event.target.getAttribute('data-key'))
                 this.$store.commit('removeCourse', {yearID: this.$props.yearId, courseID: event.target.getAttribute('data-key')})
             }
         },
