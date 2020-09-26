@@ -1,5 +1,6 @@
 <template>
   <ul class="sticky h-full top-0 hidden md:flex flex-col py-32 ml-8 mr-8 overflow-x-hidden w-64">
+      <button v-on:click="calculateCGPA" class="btn btn-blue mb-4">Calculate</button>
       <a href="#previous-schools" ><h3 class="text-gray-700 font-semibold">Previous Schools</h3></a>
       <li class="py-2" v-for="prevSchool in prevSchools" :key="prevSchool.id">
           <ul class="pl-4">
@@ -24,6 +25,7 @@ export default {
     data () {
         return {
             list: ['Previous Schools', 'Future Schools', 'Three', 'Four'],
+
         }
     },
     created: function () {
@@ -43,6 +45,10 @@ export default {
         scrollToElement: function (id) {
             var el = document.getElementById(id)
             el.scrollIntoView()
+        },
+        calculateCGPA: function (){
+            console.log(this.$store.getters.cGPA)
+            //return this.$store.getters.cGPA;
         }
     },
 
@@ -61,7 +67,9 @@ export default {
                 name: school.name,
                 shortName: school.shortName
             }))
-        }
+        },
+
+
     }
 }
 </script>

@@ -18,7 +18,7 @@ import Navbar from './components/Navbar.vue'
 import PriorSchools from './components/PriorSchools/PriorSchools'
 import ProgressSideBar from './components/ProgressSideBar'
 import FutureSchools from './components/FutureSchools/FutureSchools'
-import { calcCGPA } from './data/uniGPA'
+import { calcCGPA, getALLOMSASGPA } from './data/uniGPA'
 
 
 Vue.use(Vuex)
@@ -96,13 +96,15 @@ const store = new Vuex.Store({
     addCourse: function(state, yearID) {
       
       state.yearsAdded[yearID].courses.push(state.coursesId)
+      const OMSASID = state.schoolsAdded[state.yearsAdded[yearID].schoolId].OMSASID
       Vue.set(state.coursesAdded, state.coursesId, {
         id: state.coursesId,
         yearId: yearID,
+        OMSASID,
         courseName: '',
         courseWeight: '',
         courseMark: '',
-        courseChecked: false,
+        courseChecked: true,
       })
       state.coursesId++
     },
@@ -144,23 +146,16 @@ const store = new Vuex.Store({
     - schoolscGPAList contains list with mappings { id, schoolcGPA } where schoolcGPA is cGPA calculated for all years at that school
 
     */
+   
     cGPA: state => {
       // For each school calculate cGPA across all years
-
-    let schoolCoursesList = state.schoolsAdded(school => {
-        
-        let courseList = school.years.map(yearId => (
-          state.yearsAdded[yearId].courses.map(courseId => state.coursesAdded[courseId].coursemark)
-      ))
-      return { id: school.id, OMSASI: courseList }
-        
-    })
-      
-      return {fullCGPA: calcCGPA(schoolCoursesList), }
+      let courseList = getALLOMSASGPA(Object.values(state.coursesAdded))
+      return calcCGPA(courseList)
     },
+    
     /*
     annualGPA: state => {
-      // For each school calcute annual GPA for each year
+      // For each school calculate annual GPA for each year
       state.schoolsAdded(school => {
 
       })
