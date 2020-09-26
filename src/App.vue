@@ -2,7 +2,7 @@
   <div id="app" >
     <Navbar />
     <main id="main" class="container flex mx-auto max-w-6xl">
-            <ProgressSideBar />
+      <ProgressSideBar />
       <div id="schools-container" class="flex flex-col mt-24 px-4"> 
         <PriorSchools />
         <FutureSchools />
